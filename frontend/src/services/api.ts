@@ -143,6 +143,28 @@ export const strategyAPI = {
   
   getStrategy: (id: string) =>
     api.get(`/api/strategies/${id}`),
+  
+  // Version management endpoints
+  getVersions: (strategyId: string) =>
+    api.get(`/api/strategies/${strategyId}/versions`),
+  
+  getVersion: (strategyId: string, versionNumber: number) =>
+    api.get(`/api/strategies/${strategyId}/versions/${versionNumber}`),
+  
+  createVersion: (strategyId: string, data: { snapshotJson: string; changeSummary?: string }) =>
+    api.post(`/api/strategies/${strategyId}/versions`, data),
+  
+  getLatestVersion: (strategyId: string) =>
+    api.get(`/api/strategies/${strategyId}/versions/latest`),
+  
+  restoreVersion: (strategyId: string, versionNumber: number, data?: { changeSummary?: string }) =>
+    api.post(`/api/strategies/${strategyId}/versions/${versionNumber}/restore`, data),
+  
+  compareVersions: (strategyId: string, version1: number, version2: number) =>
+    api.get(`/api/strategies/${strategyId}/versions/compare?version1=${version1}&version2=${version2}`),
+  
+  getVersionStatistics: (strategyId: string) =>
+    api.get(`/api/strategies/${strategyId}/versions/statistics`),
 };
 
 export const backtestAPI = {

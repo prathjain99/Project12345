@@ -5,6 +5,8 @@ import Sidebar from './Sidebar';
 import Header from './Header';
 import Overview from './Overview';
 import StrategyBuilder from '../Strategy/StrategyBuilder';
+import StrategyEditor from '../Strategy/StrategyEditor';
+import StrategyView from '../Strategy/StrategyView';
 import Backtesting from '../Strategy/Backtesting';
 import ProductCreator from '../Products/ProductCreator';
 import Portfolio from '../Portfolio/Portfolio';
@@ -20,6 +22,7 @@ const Dashboard: React.FC = () => {
     <div className="flex h-screen bg-gray-900">
       <Sidebar />
       <div className="flex-1 flex flex-col overflow-hidden">
+        
         <Header />
         <main className="flex-1 overflow-y-auto bg-gray-900 p-6">
           <Routes>
@@ -28,6 +31,9 @@ const Dashboard: React.FC = () => {
             {(user?.role === 'researcher' || user?.role === 'portfolio_manager') && (
               <>
                 <Route path="/strategies" element={<StrategyBuilder />} />
+                <Route path="/strategies/new" element={<StrategyEditor />} />
+                <Route path="/strategies/edit/:id" element={<StrategyEditor />} />
+                <Route path="/strategies/:id" element={<StrategyView />} />
                 <Route path="/backtesting" element={<Backtesting />} />
               </>
             )}
