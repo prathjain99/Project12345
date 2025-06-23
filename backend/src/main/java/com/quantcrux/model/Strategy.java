@@ -39,6 +39,8 @@ public class Strategy {
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
+    private Integer currentVersion;
+
     @PrePersist
     protected void onCreate() {
         createdAt = LocalDateTime.now();
@@ -68,6 +70,14 @@ public class Strategy {
 
     public LocalDateTime getCreatedAt() { return createdAt; }
     public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
+
+    public void setCurrentVersion(Integer version) {
+        this.currentVersion = version;
+    }
+
+    public Integer getCurrentVersion() {
+        return currentVersion;
+    }
 
     @Embeddable
     public static class Indicators {
@@ -142,4 +152,6 @@ public class Strategy {
         public Double getPositionSize() { return positionSize; }
         public void setPositionSize(Double positionSize) { this.positionSize = positionSize; }
     }
+
+
 }
